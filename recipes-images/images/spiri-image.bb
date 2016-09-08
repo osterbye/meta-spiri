@@ -23,6 +23,10 @@ inherit core-image
 inherit bootfs-image
 inherit consistent_timestamps
 
+MACHINE_EXTRA_INSTALL_SPIRI ?= "\
+    protobuf \
+    "
+
 MACHINE_EXTRA_INSTALL_QT ?= ""
 
 IMAGE_INSTALL += "\
@@ -33,4 +37,5 @@ IMAGE_INSTALL += "\
     ${@base_contains("DISTRO_FEATURES", "gstreamer", "packagegroup-b2qt-embedded-gstreamer", "", d)} \
     packagegroup-b2qt-qt5-modules \
     packagegroup-b2qt-embedded-addons \
+    ${MACHINE_EXTRA_INSTALL_SPIRI} \
     "
