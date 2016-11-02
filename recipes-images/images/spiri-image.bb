@@ -25,6 +25,13 @@ inherit consistent_timestamps
 
 MACHINE_EXTRA_INSTALL_SPIRI ?= "\
     protobuf \
+    ppp \
+    screen \
+    usb-modeswitch \
+    ofono \
+    minicom \
+    wvdial \
+    nano \
     "
 
 MACHINE_EXTRA_INSTALL_QT ?= ""
