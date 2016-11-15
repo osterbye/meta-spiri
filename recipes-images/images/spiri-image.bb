@@ -46,12 +46,4 @@ IMAGE_INSTALL += "\
     packagegroup-b2qt-embedded-addons \
     ${MACHINE_EXTRA_INSTALL_SPIRI} \
     "
-# usb modem packages
-IMAGE_INSTALL += "ppp"
-IMAGE_INSTALL += "screen"
-IMAGE_INSTALL += "usb-modeswitch"
-IMAGE_INSTALL += "ofono"
-IMAGE_INSTALL += "modemmanager"
-IMAGE_INSTALL += "minicom"
-IMAGE_INSTALL += "wvdial"
-IMAGE_INSTALL += "nano"
+

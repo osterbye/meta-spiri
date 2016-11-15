@@ -1,6 +1,3 @@
-#FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-#SRC_URI += "file://usbmodem.cfg"
-
 # Place changes to the defconfig here
 config_script () {
 #    #example change to the .config
@@ -18,7 +15,7 @@ config_script () {
     echo "CONFIG_PPP_BSDCOMP=m" >> ${B}/.config
     sed -i -e /CONFIG_PPP_DEFLATE/d ${B}/.config
     echo "CONFIG_PPP_DEFLATE=m" >> ${B}/.config
-    sed -i -e /CONFIG_PPP_FILTEE/d ${B}/.config
+    sed -i -e /CONFIG_PPP_FILTER/d ${B}/.config
     echo "CONFIG_PPP_FILTER=y" >> ${B}/.config
     sed -i -e /CONFIG_PPP_MPPE/d ${B}/.config
     echo "CONFIG_PPP_MPPE=m" >> ${B}/.config
