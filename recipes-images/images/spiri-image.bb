@@ -18,6 +18,9 @@ IMAGE_FEATURES += "\
         debug-tweaks \
         hwcodecs \
         "
+        
+#DISTRO_FEATURES_append = " 3g"
+#MACHINE_FEATURES_append = " 3g"
 
 inherit core-image
 inherit bootfs-image
@@ -33,6 +36,11 @@ MACHINE_EXTRA_INSTALL_SPIRI ?= "\
     wvdial \
     nano \
     "
+
+#MACHINE_EXTRA_INSTALL_SPIRI ?= "\
+#    protobuf \
+#    "
+#MACHINE_EXTRA_INSTALL_SPIRI ?= ""
 
 MACHINE_EXTRA_INSTALL_QT ?= ""
 
