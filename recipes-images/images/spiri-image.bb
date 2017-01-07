@@ -25,6 +25,7 @@ inherit consistent_timestamps
 
 MACHINE_EXTRA_INSTALL_SPIRI ?= "\
     protobuf \
+    mobile-broadband-provider-info \
     "
 
 MACHINE_EXTRA_INSTALL_QT ?= ""
