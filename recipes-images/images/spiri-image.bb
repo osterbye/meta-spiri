@@ -1,6 +1,6 @@
 ############################################################################
 ##
-## Copyright (C) 2016 Spiri ApS
+## Copyright (C) 2016-2017 Spiri ApS
 ##
 ############################################################################
 
@@ -26,6 +26,8 @@ inherit consistent_timestamps
 MACHINE_EXTRA_INSTALL_SPIRI ?= "\
     protobuf \
     mobile-broadband-provider-info \
+    libconnman-qt5 \
+    libqofono \
     "
 
 MACHINE_EXTRA_INSTALL_QT ?= ""
