@@ -1,0 +1,26 @@
+From d727fb12b08131d09cf903d3d268f29dcf6c72b2 Mon Sep 17 00:00:00 2001
+From: Nikolaj Due Oesterbye <nikolaj@due-oesterbye.dk>
+Date: Wed, 18 Jan 2017 13:59:54 +0100
+Subject: [PATCH] dk: add MNC 20 and 66 to Telia
+
+---
+ serviceproviders.xml | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/serviceproviders.xml b/serviceproviders.xml
+index a81883f..fcbcc5d 100644
+--- a/serviceproviders.xml
++++ b/serviceproviders.xml
+@@ -3574,7 +3574,9 @@ conceived.
+ 	<provider>
+ 		<name>Telia</name>
+ 		<gsm>
++			<network-id mcc="238" mnc="20"/>
+ 			<network-id mcc="238" mnc="30"/>
++			<network-id mcc="238" mnc="66"/>
+ 
+ 			<voicemail>28184000</voicemail>
+ 			<balance-check>
+-- 
+2.7.4
+
