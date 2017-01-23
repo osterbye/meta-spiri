@@ -28,6 +28,7 @@ MACHINE_EXTRA_INSTALL_SPIRI ?= "\
     mobile-broadband-provider-info \
     libconnman-qt5 \
     libqofono \
+    cm-concon \
     "
 
 MACHINE_EXTRA_INSTALL_QT ?= ""

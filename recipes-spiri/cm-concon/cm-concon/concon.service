@@ -1,0 +1,10 @@
+[Unit]
+Description=Connection Control Daemon
+After=systemd-user-sessions.service
+ConditionPathExists=/usr/bin/concond
+
+[Service]
+ExecStart=-/usr/bin/concond
+
+[Install]
+WantedBy=multi-user.target
