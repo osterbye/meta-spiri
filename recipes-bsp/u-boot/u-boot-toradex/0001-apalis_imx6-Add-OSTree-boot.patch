@@ -1,0 +1,73 @@
+From 06a54c3a6b3b02fcf076f3a51eec97bebec3c195 Mon Sep 17 00:00:00 2001
+From: Nikolaj Due Oesterbye <nikolaj@due-oesterbye.dk>
+Date: Wed, 25 Jan 2017 15:26:03 +0100
+Subject: [PATCH] apalis_imx6: Add OSTree boot
+
+---
+ include/configs/apalis_imx6.h | 33 +++++++++++++++++++++++++++++----
+ 1 file changed, 29 insertions(+), 4 deletions(-)
+
+diff --git a/include/configs/apalis_imx6.h b/include/configs/apalis_imx6.h
+index 53d9a0c..c3698fb 100644
+--- a/include/configs/apalis_imx6.h
++++ b/include/configs/apalis_imx6.h
+@@ -234,6 +234,29 @@
+ 	"emmcdtbload=setenv dtbparam; load mmc 0:1 ${fdt_addr_r} " \
+ 		"${fdt_file} && setenv dtbparam \" - ${fdt_addr_r}\" && true\0"
+ 
++#define EMMC_OSTREE_BOOTCMD \
++	"ostreeargs=ip=off root=/dev/mmcblk0p2 rw,noatime rootfstype=ext3 " \
++		"rootwait\0" \
++	"ostreeboot=run setup; " \
++		"if run ostreeuenvload; then " \
++			"run ostreeuenvimport; " \
++			"run ostreekernelload; " \
++			"run ostreedtbload; " \
++			"run ostreeramfsload; " \
++			"setenv bootargs ${bootargs} ${defargs} ${ostreeargs} " \
++				"${setupargs} ${vidargs}; echo Booting OSTree from eMMC...; " \
++			"bootm ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}; " \
++		"else " \
++			"echo Error loading uEnv.txt; " \
++			"exit; " \
++		"fi;\0" \
++	"ostreeuenvload=load mmc 0:1 ${kernel_addr_r} uEnv.txt\0" \
++	"ostreeuenvimport=env import -t ${kernel_addr_r} ${filesize}\0" \
++	"ostreekernelload=load mmc 0:1 ${kernel_addr_r} ${kernel_image}\0" \
++	"ostreeramfsload=load mmc 0:1 ${ramdisk_addr_r} ${ramdisk_image}\0" \
++	"ostreedtbload=load mmc 0:1 ${fdt_addr_r} " \
++		"${bootdir}/${fdt_file} && true\0"
++
+ #define MEM_LAYOUT_ENV_SETTINGS \
+ 	"fdt_addr_r=0x12000000\0" \
+ 	"fdt_high=0xffffffff\0" \
+@@ -273,13 +296,14 @@
+ 		"${fdt_file} && setenv dtbparam \" - ${fdt_addr_r}\" && true\0"
+ 
+ #ifndef CONFIG_APALIS_IMX6_V1_0
+-#define FDT_FILE "imx6q-apalis-eval.dtb"
+-#define FDT_FILE_V1_0 "imx6q-apalis_v1_0-eval.dtb"
++#define FDT_FILE "imx6q-apalis-ixora.dtb"
++#define FDT_FILE_V1_0 "imx6q-apalis_v1_0-ixora.dtb"
+ #else
+-#define FDT_FILE "imx6q-apalis_v1_0-eval.dtb"
++#define FDT_FILE "imx6q-apalis_v1_0-ixora.dtb"
+ #endif
+ #define CONFIG_EXTRA_ENV_SETTINGS \
+-	"bootcmd=run sdboot ; echo ; echo sdboot failed ; " \
++	"bootcmd=run ostreeboot ; echo ; echo ostreeboot failed ; " \
++		"run sdboot ; echo ; echo sdboot failed ; " \
+ 		"run emmcboot ; echo ; echo emmcboot failed ; " \
+ 		"run nfsboot ; echo ; echo nfsboot failed ; " \
+ 		"usb start ;" \
+@@ -290,6 +314,7 @@
+ 	"dfu_alt_info=" DFU_ALT_EMMC_INFO "\0" \
+ 	"disable_giga=1\0" \
+ 	EMMC_BOOTCMD \
++	EMMC_OSTREE_BOOTCMD \
+ 	"fdt_file=" FDT_FILE "\0" \
+ 	MEM_LAYOUT_ENV_SETTINGS \
+ 	NFS_BOOTCMD \
+-- 
+2.7.4
+
