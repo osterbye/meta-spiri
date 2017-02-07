@@ -29,6 +29,7 @@ MACHINE_EXTRA_INSTALL_SPIRI ?= "\
     libconnman-qt5 \
     libqofono \
     cm-concon \
+    cm-release \
     "
 
 MACHINE_EXTRA_INSTALL_QT ?= ""
